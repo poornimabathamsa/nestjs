@@ -30,12 +30,17 @@ export class SignupService {
         statusCode: 400,
       };
     }
-    const newSignup = new this.signupModel(createSignupDto);
-    newSignup.save();
+  
+    const createdUser = new this.signupModel(createSignupDto);
+    let savedUser = await createdUser.save(); 
 
     return {
       message: 'Signup successful',
       statusCode: 201,
+      data: {
+        id: savedUser._id,
+        // Include any other user data you want to return
+      }
     };
   }
 

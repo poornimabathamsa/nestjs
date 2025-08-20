@@ -39,4 +39,31 @@ async deleteById(id: string): Promise<void> {
 async bulkDelete():Promise<void>  {
   await this.featureModel.deleteMany({}).exec();
 }
+async getAllFeaturesWithSignupAggregation() {
+  return this.featureModel.aggregate([
+    {
+      $lookup: {
+        from: 'signups',          // collection name in MongoDB
+        localField: 'userId',     // Feature.userId
+        foreignField: '_id',      // Signup._id
+        as: 'signupData',
+      },
+    },
+    { $unwind: '$signupData' }, // Convert array into object
+    {
+      $project: {
+        _id: 1,
+        name: 1,
+        description: 1,
+        category: 1,
+        isPremium: 1,
+        'signupData.fullName': 1,
+        'signupData.email': 1,
+        'signupData.phoneNumber': 1,
+        'signupData.address': 1,
+      },
+    },
+  ]);
+}
+
 }

@@ -19,7 +19,7 @@ export class Signup {
     address: string;
 
     @Prop({ required: true, unique: true, trim: true })
-    phoneNumber: string;
+    phoneNumber: number;
 
 
     @Prop({

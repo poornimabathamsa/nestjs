@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import mongoose, { Document, Types } from 'mongoose';
 import { FeatureCategory } from '../feature-category.enum';
 export type FeatureDocument = Feature & Document & {
   _id: Types.ObjectId;
@@ -10,6 +10,11 @@ export type FeatureDocument = Feature & Document & {
   collection: 'features',
 })
 export class Feature {
+
+  // @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'signups' })
+  // userId: string;
+
+
   @Prop({ required: true })
   name: string;
 

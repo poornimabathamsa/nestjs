@@ -15,6 +15,11 @@ import { ApiTags, ApiOperation, ApiResponse, ApiConsumes, ApiBody, ApiQuery, Api
   constructor(private readonly featuresService: FeaturesService) {}
 
 
+
+  @Get()
+  async getAllFeatures() {
+    return this.featuresService.getAllFeaturesWithSignupAggregation();
+  }
     //bulk delete features by IDs
 @Delete('bulk')
 @ApiOperation({ summary: 'Bulk delete features by IDs' })
